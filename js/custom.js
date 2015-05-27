@@ -14,6 +14,27 @@ $(document).ready(function(){
 	var owner = null;
 	var streetName = null;
 	
+	
+	// residential rgb(235, 126, 9);
+	// commericial rgb(44, 153, 28)
+	var iconMappings = {
+		industrial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAL0lEQVQIW2NkwAMYQXKvb3D+F9X4zgijYerBAuiaQQpBYlglQRIgBTgl8eokKAkAs60YaSxUiugAAAAASUVORK5CYII=",
+		multiresidence: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAKklEQVQIW2N8Xcf5nwEKRJu+MyLzwRyRxm8Mb+q5GNBpFJUwSZhJA6ETAI8WOR9e5KR2AAAAAElFTkSuQmCC",
+		mixeduse: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAN0lEQVQIW2N8Xcf5nwEKRJu+M/7//x/OZwRJijR+Y3hTz8UAopEBWBJFBImDohMkDtMNMolGOgHnbyc11/dvBwAAAABJRU5ErkJggg==",
+		commercial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAMklEQVQIW2P8////fwYcgBEkqTtLFkP6ctpjBrgkiANShEzTWueV9CeMOjNl/sNokN0AO4ZB7EaWScQAAAAASUVORK5CYII=",
+		other: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2NkYGD4z0AEYBxViC+UqB88AKk6CgGQfUVbAAAAAElFTkSuQmCC"
+ /*
+ - education - blue hat 
+ - food - green cup
+ - health - red cross on white
+ - parking - black
+ - vacant - green box
+ - house - orange house
+ - municipal - grey box
+ - parks - green tree
+ - churches - gold cross*/
+	}
+	
 	// load from the query strings
 	
 	$.QueryString = (function(a) {
@@ -41,6 +62,17 @@ $(document).ready(function(){
 			$.QueryString['streetName'] != ""){
 		streetName = $.QueryString['streetName'];
 		$('#map-controls input[name=streetName]').val($.QueryString['streetName']);
+	}
+	var getIcon = function(property){
+		var type = "other";
+		if(useCategories[property.usecode] && useCategories[property.usecode].type){
+			type = useCategories[property.usecode].type;
+		}
+		if(iconMappings[type]){
+			return iconMappings[type];
+		} else {
+			return iconMappings["other"];
+		}
 	}
 	var displayProperty = function(property){
 		var display = true;
@@ -73,49 +105,54 @@ $(document).ready(function(){
 			if(location && location != null) {
 				var latLng = new google.maps.LatLng(location.location.lat,location.location.lng);
 				var marker = null;
+				var icon = getIcon(property);
 				if(displayProperty(property)){
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: map,
-						title: location.address
+						title: location.address,
+						icon: icon
 					});
 				} else {
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: null,
-						title: location.address
+						title: location.address,
+						icon: icon
 					});
 				}
-				google.maps.event.addListener(marker, 'click', function() {
-    				$.Mustache.load('{{ site.baseurl }}/templates/property.html').done(function () {
-    				    				
-						$('#map-controls .modal-body').hide();
-						$(this).removeClass('btn-danger');
-						$(this).addClass('btn-success');
-    				
-    					var id = 'property-'+property.address.replace(' ','-');
-        				$('body').mustache('property-modal', {
-        					property: property,
-        					location: location,
-        					useCategory: useCategories[property.usecode],
-        					id: id
-        				});
-        				$('#'+id).modal('show');
-						// Set up the map and enable the Street View control.
-						var mp = new google.maps.Map(document.getElementById(id +'-streetview'),{
-							center: latLng,
-							zoom: 16
-						});
-						panorama = mp.getStreetView();
-						panorama.setOptions({
-							position: latLng,
-							visible: true
-						});
-						$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-							panorama.setVisible(true);
-						});
+				google.maps.event.addListener(marker, 'click', function() {				
+					$('#map-controls .modal-body').hide();
+					$(this).removeClass('btn-danger');
+					$(this).addClass('btn-success');
+					var id = 'property-'+property.address.replace(' ','-');
+					if($('#'+id).length == 0){
+						$.Mustache.load('{{ site.baseurl }}/templates/property.html').done(function () {
 
-					});
+							$('body').mustache('property-modal', {
+								property: property,
+								location: location,
+								useCategory: useCategories[property.usecode],
+								id: id
+							});
+							$('#'+id).modal('show');
+							// Set up the map and enable the Street View control.
+							var mp = new google.maps.Map(document.getElementById(id +'-streetview'),{
+								center: latLng,
+								zoom: 16
+							});
+							panorama = mp.getStreetView();
+							panorama.setOptions({
+								position: latLng,
+								visible: true
+							});
+							$('#'+id+' a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+								panorama.setVisible(true);
+							});
+						});
+					} else {
+						$('#'+id).modal('show');
+					}
     			});
 				markers.push({ 
 					property: property,
