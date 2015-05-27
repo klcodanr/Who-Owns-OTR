@@ -1,3 +1,6 @@
+---
+---
+
 $(document).ready(function(){
 	var map = new google.maps.Map(document.getElementById('map-canvas'), {
 		center: { lat: 39.114329, lng: -84.516449},
@@ -53,13 +56,13 @@ $(document).ready(function(){
 		return display;
 	};
 	$.when(
-		$.getJSON('/data/locations.json', function(data) {
+		$.getJSON('{{ site.baseurl }}/data/locations.json', function(data) {
 			locations = data;
 		}),
-		$.getJSON('/data/properties.json', function(data) {
+		$.getJSON('{{ site.baseurl }}/data/properties.json', function(data) {
 			properties = data;
 		}),
-		$.getJSON('/data/use-categories.json', function(data) {
+		$.getJSON('{{ site.baseurl }}/data/use-categories.json', function(data) {
 			useCategories = data;
 		})
 	).then(function() {
@@ -84,7 +87,7 @@ $(document).ready(function(){
 					});
 				}
 				google.maps.event.addListener(marker, 'click', function() {
-    				$.Mustache.load('/templates/property.html').done(function () {
+    				$.Mustache.load('{{ site.baseurl }}/templates/property.html').done(function () {
     					var id = 'property-'+property.address.replace(' ','-');
         				$('body').mustache('property-modal', {
         					property: property,
