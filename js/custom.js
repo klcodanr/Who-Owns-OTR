@@ -168,12 +168,18 @@ $(document).ready(function(){
 	$('#map-controls form').submit(function(){
 		if($('#map-controls input[name=streetName]').val() != ""){
 			streetName = $('#map-controls input[name=streetName]').val();
+		} else {
+			streetName = null;
 		}
 		if($('#map-controls input[name=useCode]').val() != ""){
 			useCode = $('#map-controls input[name=useCode]').val().split(' ')[0];
+		} else {
+			useCode = null;
 		}
 		if($('#map-controls input[name=owner]').val() != ""){
 			owner = $('#map-controls input[name=owner]').val();
+		} else {
+			owner = null;
 		}
 		$.each(markers, function(idx, marker){
 			if(displayProperty(marker.property)){
