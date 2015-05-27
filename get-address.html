@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVlGu8Mle4esyGNQgn0qo0bOQE74V63b0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    	function search() {
+    		var address = $('#address').val();
+			$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+address+',+Cincinnati,+OH&key=AIzaSyCVlGu8Mle4esyGNQgn0qo0bOQE74V63b0', function(data){
+				$('#data').text(JSON.stringify(data.results, null, 4));
+				$.getJSON('/data/locations.json', function(locations){
+					var latLong = {
+    					id: address,
+    					location: data.results[0].geometry.location,
+    					address: data.results[0].formatted_address
+    				};
+    				locations[address] = latLong;
+    				$('#all-data').text(JSON.stringify(locations));
+    			});
+			});
+    	}
+    </script>
+  </head>
+  <body>
+  	<input type="text" id="address" />
+  	<input type="button" onclick="javascript:search()" value="Find"/>	
+  	<br/>Google Location<br/>
+	<textarea id="data"></textarea>
+  	<br/>New JSON<br/>
+	<textarea id="all-data"></textarea>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVlGu8Mle4esyGNQgn0qo0bOQE74V63b0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$.getJSON('/data/properties.json', function(properties){
+    			var total = properties.length;
+    			var todo = properties.length;
+    			var latLongs = {};
+    			$('#total').text(total);
+    			var processAddress = function(property){
+    				if(property.streetnumber == "" || property.streetname == ""){
+    					return;
+    				}			
+					$('#current').text(property.address);
+					$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+property.address+',+Cincinnati,+OH&key=AIzaSyCVlGu8Mle4esyGNQgn0qo0bOQE74V63b0', function(data){
+						var latLong = {
+							id: property.address,
+							location: data.results[0].geometry.location,
+							address: data.results[0].formatted_address
+						};
+						latLongs[property.address] = latLong;
+						todo--;
+						$('#count').text((total - todo));
+					});
+    			};
+    			var getLatLong = function(){
+	    			for(var i = 0; i < 5 && properties.length > 0; i++) {
+    					processAddress(properties.pop());
+    				}
+    				if(properties.length > 0){
+    					setTimeout(getLatLong, 2000);
+    				} else {
+    					$('#data').text(JSON.stringify(latLongs));
+    				}
+    			};
+    			getLatLong();
+    		});
+    	});
+    </script>
+  </head>
+  <body>
+  	<p>
+  		Loading <span id="count"></span> of <span id="total"></span>: <span id="current"></span>
+		<textarea id="data"></textarea>
+  </body>
+</html>

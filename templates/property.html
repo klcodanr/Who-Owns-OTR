@@ -1,0 +1,74 @@
+<script id="property-modal" type="text/html">
+	<div class="modal fade" id="{{ id }}" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{{ location.address }}</h4>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#{{id}}-info-tab" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+							<li role="presentation"><a href="#{{id}}-streetview-tab" aria-controls="streetview" role="tab" data-toggle="tab">Streetview</a></li>
+						</ul>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="{{id}}-info-tab">
+							<dl>
+								<dt>Owner</dt>
+								<dd>
+									{{ property.owner }}
+									<a href="/?owner={{property.owner}}" class="btn btn-default"> Find Others</a>
+								</dd>
+								<dt>Address</dt>
+								<dd>
+									{{ location.address }}
+								</dd>
+								<dt>Use</dt>
+								<dd>
+									<dl>
+										<dt>
+											Code
+										</dt>
+										<dd>
+											{{ useCategory.useCategory }}
+											<a href="/?useCode={{ useCategory.useCategory }} - {{ useCategory.description }}" class="btn btn-default"> Find Others</a>
+										</dd>
+										<dt>
+											Category
+										</dt>
+										<dd>
+											{{ useCategory.category }}
+										</dd>
+										<dt>
+											Description
+										</dt>
+										<dd>
+											{{ useCategory.description }}
+										</dd>
+									</dl>
+								</dd>
+								<dt>Last Known Sale Date</dt>
+								<dd>
+									{{ property.datesale }}
+								</dd>
+								<dt>Last Known Sale Price</dt>
+								<dd>
+									{{ property.saleprice }}
+								</dd>
+							</dl>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="{{id}}-streetview-tab">					
+			    				<div id="{{ id }}-streetview" class="streetview"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>

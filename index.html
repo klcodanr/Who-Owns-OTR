@@ -1,0 +1,42 @@
+---
+layout: default
+title: Who Owns OTR?
+---
+
+<div class="modal" id="map-controls">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn btn-success" id="showHide">Show</button>
+				<h3>Refine</h3>
+			</div>
+            <div class="modal-body">                
+				<form action="/" method="get" autocomplete="off">
+					<p>
+						Use the fields below to limit the displayed properties.
+					</p>
+					<div class="form-group">
+						<label for="useCode">Use Code</label>
+						<input type="text" name="useCode" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="owner">Owner</label>
+						<input type="text" name="owner" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="streetName">Street Name</label>
+						<input type="text" name="streetName" class="form-control" />
+					</div>
+					<br/>
+					<br/>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Find</button>
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="map-container">
+    <div id="map-canvas" class="map-canvas"></div>
+</div>
