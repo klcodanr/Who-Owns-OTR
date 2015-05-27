@@ -88,6 +88,11 @@ $(document).ready(function(){
 				}
 				google.maps.event.addListener(marker, 'click', function() {
     				$.Mustache.load('{{ site.baseurl }}/templates/property.html').done(function () {
+    				    				
+						$('#map-controls .modal-body').hide();
+						$(this).removeClass('btn-danger');
+						$(this).addClass('btn-success');
+    				
     					var id = 'property-'+property.address.replace(' ','-');
         				$('body').mustache('property-modal', {
         					property: property,
@@ -161,11 +166,20 @@ $(document).ready(function(){
 		$('#showHide').addClass('btn-danger');
 	}
 	$('#map-controls form').submit(function(){
+		if($('#map-controls input[name=streetName]').val() != ""){
+			streetName = $('#map-controls input[name=streetName]').val();
+		}
+		if($('#map-controls input[name=useCode]').val() != ""){
+			useCode = $('#map-controls input[name=useCode]').val().split(' ')[0];
+		}
+		if($('#map-controls input[name=owner]').val() != ""){
+			owner = $('#map-controls input[name=owner]').val();
+		}
 		$.each(markers, function(idx, marker){
 			if(displayProperty(marker.property)){
-				marker.setMap(map);
+				marker.marker.setMap(map);
 			} else {
-				marker.setMap(null);
+				marker.marker.setMap(null);
 			}
 		});
 		$('#map-controls').modal("hide");

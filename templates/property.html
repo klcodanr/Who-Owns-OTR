@@ -19,7 +19,9 @@
 								<dt>Owner</dt>
 								<dd>
 									{{ property.owner }}
-									<a href="/?owner={{property.owner}}" class="btn btn-default"> Find Others</a>
+									<a href="/Who-Owns-OTR/?owner={{property.owner}}" title="Find properties with the same use category" class="btn btn-default">
+										&raquo;
+									</a>
 								</dd>
 								<dt>Address</dt>
 								<dd>
@@ -33,7 +35,9 @@
 										</dt>
 										<dd>
 											{{ useCategory.useCategory }}
-											<a href="/?useCode={{ useCategory.useCategory }} - {{ useCategory.description }}" class="btn btn-default"> Find Others</a>
+											<a href="/Who-Owns-OTR/?useCode={{ useCategory.useCategory }} - {{ useCategory.description }}" title="Find properties with the same use category" class="btn btn-default">
+												&raquo;
+											</a>
 										</dd>
 										<dt>
 											Category
