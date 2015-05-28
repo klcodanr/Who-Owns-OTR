@@ -14,21 +14,22 @@ $(document).ready(function(){
 	var owner = null;
 	var streetName = null;
 	
-	
-	// residential rgb(235, 126, 9);
-	// commericial rgb(44, 153, 28)
-	var iconMappings = {
-		industrial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAL0lEQVQIW2NkwAMYQXKvb3D+F9X4zgijYerBAuiaQQpBYlglQRIgBTgl8eokKAkAs60YaSxUiugAAAAASUVORK5CYII=",
-		multiresidence: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAKklEQVQIW2N8Xcf5nwEKRJu+MyLzwRyRxm8Mb+q5GNBpFJUwSZhJA6ETAI8WOR9e5KR2AAAAAElFTkSuQmCC",
-		mixeduse: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAN0lEQVQIW2N8Xcf5nwEKRJu+M/7//x/OZwRJijR+Y3hTz8UAopEBWBJFBImDohMkDtMNMolGOgHnbyc11/dvBwAAAABJRU5ErkJggg==",
+	// industrial ccbb04
+	// residential EB7E00;
+	// commericial 2C991C
+	// health f50303
+	var iconMappings = {		
 		commercial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAMklEQVQIW2P8////fwYcgBEkqTtLFkP6ctpjBrgkiANShEzTWueV9CeMOjNl/sNokN0AO4ZB7EaWScQAAAAASUVORK5CYII=",
+		education: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAR0lEQVQYV2NkQANeLr/+g4S27WFjRJZC4YAkiFIIUwQzCdlUuInoitAVgxUiK4KZgi7GiMs6dHEME9FDARYC5CvE6UZiPQMA2go2knA2XnUAAAAASUVORK5CYII=",
+		food: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOUlEQVQYV2NkIBIwEqmOAa5QZ6bMf2yarqQ/AashqBCmmaBCkIkg2wZAIUluRPE1iIMeRLCgAckBAAOeIWvcifSZAAAAAElFTkSuQmCC",
+		health: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAMUlEQVQYV2P8////fwYk8I2FBczj+vMHWZiBcQAVfmVmRnEjisOQOIxEKxxAzxBrNQA2ZTvfJo+G3AAAAABJRU5ErkJggg==",
+		industrial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANElEQVQYV2NkIBIwgtSd2c3y38T1DwYb2QziFYJMw2c7zCZGQgpBhoAUD5BCkPVEWU2SQgB2WyepcAdWWgAAAABJRU5ErkJggg==",
+		mixeduse: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2N8XcfwnwEJiDYxMIK4////RxFnBCkUaYSIvalnZACxGRkZGbEqRDYRr0J0E5E1wthgq7FJoIthdSOye2HsoWAiANDySmvMFJhmAAAAAElFTkSuQmCC",
+		multiresidence: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAP0lEQVQYV2N8XcfwnwEJiDYxMIK46OKMIAGRRojaN/WMDCA2IyMjhjhYANlEZIXI4lhNRDYdxsZqIkxy2JoIANVfVhvYfurJAAAAAElFTkSuQmCC",
+		parking: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANklEQVQYV2NkYGD4z0AEYIQp/P8fVT0jI0gKAVAUIkuCNCLzaawQxU3EuhE9IHC6kXKFhMIcAAswKwGeIlp8AAAAAElFTkSuQmCC",
+		vacant: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2PUmSnzn4EIwDiqEF8oUT94AFatEsvLX8CNAAAAAElFTkSuQmCC",
 		other: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2NkYGD4z0AEYBxViC+UqB88AKk6CgGQfUVbAAAAAElFTkSuQmCC"
  /*
- - education - blue hat 
- - food - green cup
- - health - red cross on white
- - parking - black
- - vacant - green box
  - house - orange house
  - municipal - grey box
  - parks - green tree
