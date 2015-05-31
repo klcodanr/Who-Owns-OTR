@@ -134,8 +134,7 @@ $(document).ready(function(){
 						map: map,
 						title: location.address,
 						icon: {
-							url: icon,
-							size: new google.maps.Size(48, 48)
+							url: icon
 						}
 					});
 				} else {
@@ -144,8 +143,7 @@ $(document).ready(function(){
 						map: null,
 						title: location.address,
 						icon: {
-							url: icon,
-							size: new google.maps.Size(48, 48)
+							url: icon
 						}
 					});
 				}
