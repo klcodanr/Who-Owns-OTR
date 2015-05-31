@@ -16,24 +16,25 @@ $(document).ready(function(){
 	
 	// industrial ccbb04
 	// residential EB7E00;
-	// commericial 2C991C
+	// park/vacant 2C991C
+	// commercial 6b07ad
 	// health f50303
-	var iconMappings = {		
-		commercial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAMklEQVQIW2P8////fwYcgBEkqTtLFkP6ctpjBrgkiANShEzTWueV9CeMOjNl/sNokN0AO4ZB7EaWScQAAAAASUVORK5CYII=",
+	// church FFD700
+	var iconMappings = {
+		church: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAMUlEQVQYV2PMZl/7nwEJTLkQDOblGKxFFmZgJEkhzBQUI5A4INPBJhKtkPpuHOQmAgBmyTM3Y41FHgAAAABJRU5ErkJggg==",
+		commercial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKklEQVQYV2NkIBIwgtRls6/9j0/91J/BjHCFIA6yJmQ+isJRE9FDABQ8AKF5RAvN8G1DAAAAAElFTkSuQmCC",
 		education: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAR0lEQVQYV2NkQANeLr/+g4S27WFjRJZC4YAkiFIIUwQzCdlUuInoitAVgxUiK4KZgi7GiMs6dHEME9FDARYC5CvE6UZiPQMA2go2knA2XnUAAAAASUVORK5CYII=",
 		food: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOUlEQVQYV2NkIBIwEqmOAa5QZ6bMf2yarqQ/AashqBCmmaBCkIkg2wZAIUluRPE1iIMeRLCgAckBAAOeIWvcifSZAAAAAElFTkSuQmCC",
 		health: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAMUlEQVQYV2P8////fwYk8I2FBczj+vMHWZiBcQAVfmVmRnEjisOQOIxEKxxAzxBrNQA2ZTvfJo+G3AAAAABJRU5ErkJggg==",
+		house: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASklEQVQYV2NkIBIwoqt7XcfwHyQm2sSAIofCgSmCaUZWDFeIrghdMVghLkXIihkJKYIpJt5EmNUgh2PzDEgMJIdhIsynyJpIUggAAOcmc7tJ3u0AAAAASUVORK5CYII=",
 		industrial: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANElEQVQYV2NkIBIwgtSd2c3y38T1DwYb2QziFYJMw2c7zCZGQgpBhoAUD5BCkPVEWU2SQgB2WyepcAdWWgAAAABJRU5ErkJggg==",
 		mixeduse: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2N8XcfwnwEJiDYxMIK4////RxFnBCkUaYSIvalnZACxGRkZGbEqRDYRr0J0E5E1wthgq7FJoIthdSOye2HsoWAiANDySmvMFJhmAAAAAElFTkSuQmCC",
 		multiresidence: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAP0lEQVQYV2N8XcfwnwEJiDYxMIK46OKMIAGRRojaN/WMDCA2IyMjhjhYANlEZIXI4lhNRDYdxsZqIkxy2JoIANVfVhvYfurJAAAAAElFTkSuQmCC",
+		public: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQUlEQVQYV2NkIBIwIqubM2fOf2R+SkoKXB7OQFcE0wBTDFaISxGyYkZCimCKSVMIcgfIZBgNMgVdDEUB9RQSE+YAnHZM/YOCpcsAAAAASUVORK5CYII=",
+		park: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2P8////fwYkIFPID+Y96f+ILMzASJZCmGkwo5BNRTGRKIXoitBNhZtIlEJcipBNBZtItEKiwlG6gA8lwFFCGYkDAHAZQH+9ftttAAAAAElFTkSuQmCC",
 		parking: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANklEQVQYV2NkYGD4z0AEYIQp/P8fVT0jI0gKAVAUIkuCNCLzaawQxU3EuhE9IHC6kXKFhMIcAAswKwGeIlp8AAAAAElFTkSuQmCC",
 		vacant: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2PUmSnzn4EIwDiqEF8oUT94AFatEsvLX8CNAAAAAElFTkSuQmCC",
 		other: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYV2NkYGD4z0AEYBxViC+UqB88AKk6CgGQfUVbAAAAAElFTkSuQmCC"
- /*
- - house - orange house
- - municipal - grey box
- - parks - green tree
- - churches - gold cross*/
 	}
 	
 	// load from the query strings
@@ -75,6 +76,26 @@ $(document).ready(function(){
 			return iconMappings["other"];
 		}
 	}
+	function computeAngle(endLatLng, startLatLng) {
+		var DEGREE_PER_RADIAN = 57.2957795;
+		var RADIAN_PER_DEGREE = 0.017453;
+
+		var dlat = endLatLng.lat() - startLatLng.lat();
+		var dlng = endLatLng.lng() - startLatLng.lng();
+		// We multiply dlng with cos(endLat), since the two points are very closeby,
+		// so we assume their cos values are approximately equal.
+		var yaw = Math.atan2(dlng * Math.cos(endLatLng.lat() * RADIAN_PER_DEGREE), dlat) * DEGREE_PER_RADIAN;
+		return wrapAngle(yaw);
+	}
+
+	function wrapAngle(angle) {
+		if (angle >= 360) {
+			angle -= 360;
+		} else if (angle < 0) {
+			angle += 360;
+		}
+		return angle;
+	};
 	var displayProperty = function(property){
 		var display = true;
 		if(useCode != null && useCode != property.usecode){
@@ -112,14 +133,20 @@ $(document).ready(function(){
 						position: latLng,
 						map: map,
 						title: location.address,
-						icon: icon
+						icon: {
+							url: icon,
+							size: new google.maps.Size(48, 48)
+						}
 					});
 				} else {
 					marker = new google.maps.Marker({
 						position: latLng,
 						map: null,
 						title: location.address,
-						icon: icon
+						icon: {
+							url: icon,
+							size: new google.maps.Size(48, 48)
+						}
 					});
 				}
 				google.maps.event.addListener(marker, 'click', function() {				
@@ -145,10 +172,16 @@ $(document).ready(function(){
 							panorama = mp.getStreetView();
 							panorama.setOptions({
 								position: latLng,
-								visible: true
+									visible: true
 							});
+						
 							$('#'+id+' a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+								var angle = computeAngle(latLng, panorama.location.latLng);
 								panorama.setVisible(true);
+								panorama.setPov({
+									heading: angle,
+									pitch: 10
+								});
 							});
 						});
 					} else {

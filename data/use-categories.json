@@ -121,7 +121,7 @@
    },
    "122":{  
       "category":"Agricultural",
-      "description":"Timber - Commerical",
+      "description":"Timber - commercial",
       "useCategory":122,
       "type": "other"
    },
@@ -285,7 +285,7 @@
       "category":"Commercial",
       "description":"Vacant Land",
       "useCategory":400,
-      "type": "commerical"
+      "type": "vacant"
    },
    "401":{  
       "category":"Commercial",
@@ -315,13 +315,13 @@
       "category":"Commercial",
       "description":"Retail - Offices Over",
       "useCategory":405,
-      "type": "commerical"
+      "type": "commercial"
    },
    "406":{  
       "category":"Commercial",
       "description":"Retail - Storage Over",
       "useCategory":406,
-      "type": "commerical"
+      "type": "commercial"
    },
    "407":{  
       "category":"Commercial",
@@ -734,7 +734,8 @@
    "530":{  
       "category":"Residential",
       "description":"Three Family Dwellings",
-      "useCategory":530
+      "useCategory":530,
+      "type": "multiresidence"
    },
    "550":{  
       "category":"Residential",
@@ -860,13 +861,13 @@
       "category":"Publicly Owned",
       "description":"Charities, Hospitals & Retirement Homes",
       "useCategory":680,
-      "type": "public"
+      "type": "church"
    },
    "685":{  
       "category":"Publicly Owned",
       "description":"Public Worship",
       "useCategory":685,
-      "type": "public"
+      "type": "church"
    },
    "690":{  
       "category":"Publicly Owned",
